@@ -1,0 +1,49 @@
+<div class="container">
+
+    <div class="card card bg-light mb-3" style="margin-top: 3em;">
+        <div class="card-body">
+            <form [formGroup] = "journalEntry" (ngSubmit) = "onEntrySubmit()">
+                <div class="form-group">
+                  <label for="dateTime">Date</label>
+                  <input 
+                    class="form-control" 
+                    id="dateTime" 
+                    [formControlName] = "'dateTime'"
+                    name = "dateTime">
+                </div>
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input 
+                    class="form-control" 
+                    id="title"
+                    [formControlName] = "'title'"
+                    name="title">
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea 
+                      class="form-control" 
+                      id="content"
+                      [formControlName] = "'content'"
+                      rows="10"
+                      name="content">
+                    </textarea>
+                  </div>
+                  <div class="form-group form-inline" [formArrayName] = "'tags'">
+                    <button class="btn btn-warning" type="button" (click) = "onAddTag()">Add Tags</button> 
+                    <label for="tags"></label>
+                    <br/>
+                    <div *ngFor = "let tag of getControls(); let i = index">
+                        <input 
+                        class="form-control" 
+                        id="tags"
+                        [formControlName] = "i"
+                        name="tags"
+                        style="margin-left:1em; margin-top: 1em;">
+                    </div>
+                  </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+    </div>
+</div>

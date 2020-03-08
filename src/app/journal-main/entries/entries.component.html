@@ -1,0 +1,9 @@
+<div class="box">
+    <div class="container">
+     	<div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" *ngFor = "let entry of journalEntries">    
+                <app-entries-display [entry] = "entry"></app-entries-display>
+            </div>	
+		</div>		
+    </div>
+</div>
