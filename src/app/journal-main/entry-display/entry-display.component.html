@@ -1,1 +1,15 @@
-<p>entry-display works!</p>
+<div class="container">
+    <div class="jumbotron">
+        <h2>{{entry.title}}</h2>
+        <h5>
+            {{entry.dateTime.toDateString() + ',' + entry.dateTime.toLocaleString().split(',')[1]}}
+        </h5>
+        <hr/>
+        <div class="container-fluid">
+            <p class="content">{{entry.content}}</p>
+        </div>
+    </div>
+    <div class="tag-div" *ngFor = "let tag of entry.tags">
+        {{tag}}
+    </div>
+</div>

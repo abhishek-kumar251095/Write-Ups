@@ -10,11 +10,12 @@ import { EntryDisplayComponent } from './journal-main/entry-display/entry-displa
 const routes: Routes = [
   {path:'journal', component:JournalMainComponent},
   {path:'journal/add', component: EntryAddComponent},
-  {path:'journal/display', component:EntriesComponent}
+  {path:'journal/display', component:EntriesComponent},
+  {path:'journal/:id', component:EntryDisplayComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { } 

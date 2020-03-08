@@ -47,6 +47,4 @@ export class EntryAddComponent implements OnInit {
   getControls(){
     return (<FormArray>this.journalEntry.get('tags')).controls;
   }
-
-
 }
