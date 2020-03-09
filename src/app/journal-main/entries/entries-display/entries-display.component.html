@@ -2,12 +2,18 @@
     <!-- <i class="fa fa-instagram fa-3x" aria-hidden="true"></i> -->
     
     <div >
-        <h4 class="title">{{entry.title.slice(0,35) + (entry.title.length > 35 ? '...':'')}}</h4>
+
+        <!-- <h4 class="title">{{entry.title.slice(0,35) + (entry.title.length > 35 ? '...':'')}}</h4> -->
+        <h4 class="title">{{entry.title | shorten:35}}</h4>
+
     </div>
     <hr/>
     
     <div class="text">
-        <span>{{entry.content.slice(0,80) + (entry.content.length > 80 ? '...':'')}}</span>
+
+        <!-- <span>{{entry.content.slice(0,80) + (entry.content.length > 80 ? '...':'')}}</span> -->
+        <span>{{entry.content | shorten:80}}</span>
+
     </div>
 
     <div class="date">

@@ -13,6 +13,8 @@ import { EntriesComponent } from './journal-main/entries/entries.component';
 import { EntryDisplayComponent } from './journal-main/entry-display/entry-display.component';
 import { EntriesDisplayComponent } from './journal-main/entries/entries-display/entries-display.component';
 
+import { ShortenPipe } from '../app/pipes/shorten.pipe';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { EntriesDisplayComponent } from './journal-main/entries/entries-display/
     EntriesComponent,
     EntryDisplayComponent,
     EntriesDisplayComponent,
+    ShortenPipe
   ],
   imports: [
     BrowserModule,
