@@ -12,7 +12,9 @@
 
     <div class="date">
         <hr/>
-        <p class="date">{{entry.dateTime.toDateString() + ',' + entry.dateTime.toLocaleString().split(',')[1]}}</p>   
+        <!-- <p class="date">{{entry.dateTime.toDateString() + ',' + entry.dateTime.toLocaleString().split(',')[1]}}</p>    -->
+        <p class="date">{{entry.dateTime | date:'EEEE, MMM d, y hh:mm a'}}</p>   
+
     </div>
     
     <hr/>
