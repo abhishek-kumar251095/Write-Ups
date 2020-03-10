@@ -19,7 +19,7 @@ export class JournalMainComponent implements OnInit {
       length: 10,
       dateTime: new Date(),
       title: "Temporary Journal Entry Temporary Journal EntryTemporary Journal Entry",
-      tags:['tag1', 'tag2', 'aLongTag', 'aVeryLongTag', 'ashortOne']
+      tags:['This', 'is', 'the', 'dev', 'branch']
     }
 
     this.journalService.addEntry(entry);
