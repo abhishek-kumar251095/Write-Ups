@@ -23,7 +23,6 @@ export class JournalMainComponent implements OnInit {
     }
 
     this.journalService.addEntry(entry);
-    console.log(this.journalService.getEntries());
   }
 
 }

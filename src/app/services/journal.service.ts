@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { EntryModel } from '../journal-main/Models/entry-model';
+import { Subject } from 'rxjs/';
+import { TimelineModel } from '../Models-Shared/timeline-model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +9,7 @@ import { EntryModel } from '../journal-main/Models/entry-model';
 export class JournalService {
 
   journalData: EntryModel[] = [];
+  timelineEmitter = new Subject<TimelineModel>();
 
   constructor() { }
 
@@ -21,6 +24,4 @@ export class JournalService {
   addEntry(entry: EntryModel){
     this.journalData.push(entry);
   }
-
-
 }

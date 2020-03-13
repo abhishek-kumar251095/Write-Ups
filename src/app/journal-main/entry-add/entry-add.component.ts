@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import {EntryModel} from '../Models/entry-model';
 import {JournalService} from '../../services/journal.service';
+import { TimelineModel } from 'src/app/Models-Shared/timeline-model';
 
 @Component({
   selector: 'app-entry-add',
@@ -34,9 +35,11 @@ export class EntryAddComponent implements OnInit {
     }
     
     this.journalService.addEntry(entry);
-    console.log(this.journalService.journalData);
     (<FormArray>this.journalEntry.get('tags')).clear();
     this.journalEntry.reset();
+
+    const timelineData = new TimelineModel(this.journalService.journalData.length,'journal', entry.dateTime, entry.title);
+    this.journalService.timelineEmitter.next(timelineData);
   }
 
   onAddTag(){

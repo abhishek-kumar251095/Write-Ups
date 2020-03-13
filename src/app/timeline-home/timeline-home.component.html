@@ -1,0 +1,17 @@
+<div class="container">
+    <p class="header mt-5">Timeline</p>
+    <hr/>
+    <p *ngIf = "timelineDataArr.length == 0" class="empty mt-5">Nothing to see here!</p>
+    <div class="jumbotron mt-3" *ngIf = "timelineDataArr.length > 0">
+        <div class="timeline">
+            <div class="timeline-section" *ngFor = "let timeline of timelineDataArr.reverse()">
+                <div class="timeline-date">
+                    <p>{{timeline.date | date:'EEEE, MMM d, y, h:mm a' }}</p>
+                </div>
+                <div class="timeline-detail">
+                    <p>Added a new {{timeline.type}} entry titled '{{timeline.title}}'</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
