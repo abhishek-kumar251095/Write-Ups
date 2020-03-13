@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { JournalMainModule } from './journal-main/journal-main.module';
+import { TimelineHomeComponent } from './timeline-home/timeline-home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    TimelineHomeComponent,
   ],
   imports: [
     BrowserModule,

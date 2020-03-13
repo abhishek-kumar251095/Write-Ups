@@ -16,7 +16,6 @@ export class EntriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.journalEntries = this.journalService.getEntries();
-    console.log(this.journalEntries);
   }
 
   onGetEntry(index: number){
