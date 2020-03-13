@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { JournalService } from './services/journal.service';
-import { TimelineModel } from './Models-Shared/timeline-model';
 import { TimelineService } from './services/timeline.service';
 
 @Component({

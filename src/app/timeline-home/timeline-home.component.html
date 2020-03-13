@@ -1,7 +1,7 @@
 <div class="container">
     <p class="header mt-5">Timeline</p>
     <hr/>
-    <p *ngIf = "timelineDataArr.length == 0" class="empty mt-5">Nothing to see here!</p>
+    <p [@emptyState] *ngIf = "timelineDataArr.length == 0" class="empty mt-5">Nothing to see here!</p>
     <div class="jumbotron mt-3" *ngIf = "timelineDataArr.length > 0">
         <div class="timeline">
             <div class="timeline-section" *ngFor = "let timeline of timelineDataArr.reverse()">
