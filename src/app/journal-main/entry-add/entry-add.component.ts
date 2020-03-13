@@ -38,7 +38,7 @@ export class EntryAddComponent implements OnInit {
     (<FormArray>this.journalEntry.get('tags')).clear();
     this.journalEntry.reset();
 
-    const timelineData = new TimelineModel(this.journalService.journalData.length,'journal', entry.dateTime, entry.title);
+    const timelineData = new TimelineModel(this.journalService.journalData.length-1,'journal', entry.dateTime, entry.title);
     this.journalService.timelineEmitter.next(timelineData);
   }
 

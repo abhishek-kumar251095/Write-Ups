@@ -13,16 +13,16 @@ export class JournalMainComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const entry: EntryModel = {
-      userId: 1,
-      content:"This is a temporary journal entry. There are going to be many more entries. Brace yourselves!",
-      length: 10,
-      dateTime: new Date(),
-      title: "Temporary Journal Entry Temporary Journal EntryTemporary Journal Entry",
-      tags:['This', 'is', 'the', 'dev', 'branch']
-    }
+    // const entry: EntryModel = {
+    //   userId: 1,
+    //   content:"This is a temporary journal entry. There are going to be many more entries. Brace yourselves!",
+    //   length: 10,
+    //   dateTime: new Date(),
+    //   title: "Temporary Journal Entry Temporary Journal EntryTemporary Journal Entry",
+    //   tags:['This', 'is', 'the', 'dev', 'branch']
+    // }
 
-    this.journalService.addEntry(entry);
+    // this.journalService.addEntry(entry);
   }
 
 }

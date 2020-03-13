@@ -2,6 +2,7 @@ import { Component, OnInit, Input, AfterViewChecked, AfterViewInit } from '@angu
 import {TimelineModel} from '../Models-Shared/timeline-model';
 import { TimelineService } from '../services/timeline.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Router } from '@angular/router';
  
 @Component({
   selector: 'app-timeline-home',
@@ -27,12 +28,17 @@ export class TimelineHomeComponent implements OnInit {
 
   timelineDataArr: TimelineModel[] = [];
 
-  constructor(private timelineService: TimelineService) { }
+  constructor(private timelineService: TimelineService, private activatedRouter: Router) { }
 
   ngOnInit(): void {
 
     this.timelineDataArr = this.timelineService.getTimelineData();
+    console.log(this.timelineDataArr);
     
+  }
+
+  onFetchDetail(id: number){
+    this.activatedRouter.navigate(['journal', id]);
   }
 
 }

@@ -23,4 +23,5 @@ p.content{
     font-size: 16px; 
     text-align: justify;
     margin: 3em;
+    white-space: pre-wrap; 
 }
