@@ -1,0 +1,59 @@
+input, textarea{
+    border: none;
+    background-color: ivory; 
+    font-family: 'Volkorn Serif';
+}
+
+input.title-input:focus, input.date-input, textarea.content-input:focus {
+    border-color:ivory !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: ivory; 
+  }
+
+.jumbotron{
+    background-color: ivory;
+    height: 100%; 
+    padding-bottom: 1px;
+    padding-top: 45px;
+}
+
+textarea.content-input{
+    resize: none;
+    font-family: 'Volkorn Serif';
+    font-size: large;
+}
+
+input.title-input{
+    width: 75%;
+    font-size: x-large;
+}
+
+.tag-btn{   
+    font-size: x-small;
+}
+
+input.tag-input{
+    border-bottom: 1px solid lightsteelblue;
+    border-radius: 0;
+    width: 8em;
+    height: 2em;
+    font-size: small;
+    margin-left:1em; 
+    margin-top: 1em;
+}
+
+input.tag-input:focus{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-bottom: 1px solid crimson;
+    box-shadow: none;
+    outline: 0 none;
+    background-color: ivory; 
+}
+
+.btn-submit{
+    clear: both;
+    float: right;
+    font-size: small;
+    
+}
