@@ -9,7 +9,7 @@ import { TimelineModel } from '../Models-Shared/timeline-model';
 export class JournalService {
 
   journalData: EntryModel[] = [];
-  timelineEmitter = new Subject<TimelineModel>();
+  timelineEmitter: Subject<TimelineModel> = new Subject<TimelineModel>();
 
   constructor() { }
 

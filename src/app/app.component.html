@@ -17,5 +17,5 @@
     </ul>
   </div>
 </nav>
-
-<router-outlet></router-outlet>
+<app-name *ngIf = "notLoggedIn"></app-name>
+<router-outlet *ngIf = "!notLoggedIn"></router-outlet>
