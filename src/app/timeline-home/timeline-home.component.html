@@ -1,5 +1,5 @@
 <div class="container">
-    <p class="header mt-5">Timeline</p>
+    <p class="header mt-5">{{username}}'s Timeline</p>
     <hr/>
     <p [@emptyState] *ngIf = "timelineDataArr.length == 0" class="empty mt-5">Nothing to see here!</p>
     <div class="jumbotron mt-3" *ngIf = "timelineDataArr.length > 0">

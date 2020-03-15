@@ -3,6 +3,7 @@ import {TimelineModel} from '../Models-Shared/timeline-model';
 import { TimelineService } from '../services/timeline.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
+import { UsersService } from '../services/users.service';
  
 @Component({
   selector: 'app-timeline-home',
@@ -27,14 +28,16 @@ import { Router } from '@angular/router';
 export class TimelineHomeComponent implements OnInit {
 
   timelineDataArr: TimelineModel[] = [];
+  username: string;
 
-  constructor(private timelineService: TimelineService, private activatedRouter: Router) { }
+  constructor(private timelineService: TimelineService, 
+              private activatedRouter: Router,
+              private usersService: UsersService) { }
 
   ngOnInit(): void {
 
-    this.timelineDataArr = this.timelineService.getTimelineData();
-    console.log(this.timelineDataArr);
-    
+    this.username = this.usersService.getUsername().split(' ')[0].replace(/"/g,'');
+    this.timelineDataArr = this.timelineService.getTimelineData();    
   }
 
   onFetchDetail(id: number){
