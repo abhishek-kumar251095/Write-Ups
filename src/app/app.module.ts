@@ -12,6 +12,8 @@ import { JournalMainModule } from './journal-main/journal-main.module';
 import { TimelineHomeComponent } from './timeline-home/timeline-home.component';
 import { NameComponent } from './name/name.component';
 
+import {HttpClientModule} from '@angular/common/http';
+
 import {CookieService} from 'ngx-cookie-service';
 
 
@@ -27,7 +29,8 @@ import {CookieService} from 'ngx-cookie-service';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     JournalMainModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

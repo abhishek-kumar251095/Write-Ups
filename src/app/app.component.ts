@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { JournalService } from './services/journal.service';
 import { TimelineService } from './services/timeline.service';
 import { UsersService } from './services/users.service';
+import { map, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,21 @@ export class AppComponent {
     })
 
     this.subscriptionTimeline = this.journalService.timelineEmitter.subscribe(journalData => {
-      this.timelineService.addTimelineData(journalData);
+      console.log(journalData);
+      this.timelineService
+        .addTimelineData(journalData)
+        .pipe(
+          map(res => {
+            console.log(res);
+          }),
+          catchError(err => {
+            console.log(err); 
+            return err;
+          })
+        )
+        .subscribe(res => {
+          console.log(res);
+        });
     });
   }
 

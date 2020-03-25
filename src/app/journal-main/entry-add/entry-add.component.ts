@@ -4,6 +4,7 @@ import {EntryModel} from '../Models/entry-model';
 import {JournalService} from '../../services/journal.service';
 import { TimelineModel } from 'src/app/Models-Shared/timeline-model';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-entry-add',
@@ -36,7 +37,8 @@ export class EntryAddComponent implements OnInit {
       month: "short",
       day: "numeric",
       hour: "numeric",
-      minute: "numeric"   
+      minute: "numeric", 
+      year: "numeric"  
     };
 
     this.journalEntry = new FormGroup({
@@ -57,15 +59,25 @@ export class EntryAddComponent implements OnInit {
       tags: this.journalEntry.value.tags
     };
 
+    console.log(new Date(entry.dateTime).getFullYear());
+
     const filteredEntry = entry.tags.filter(item => item != null);
     entry.tags = filteredEntry;
-
-    this.journalService.addEntry(entry);
-    (<FormArray>this.journalEntry.get('tags')).clear();
-    this.journalEntry.reset();
-
-    const timelineData = new TimelineModel(this.journalService.journalData.length-1,'journal', entry.dateTime, entry.title);
-    this.journalService.timelineEmitter.next(timelineData);
+    //console.log('here');
+    this.journalService
+      .addEntry(entry)
+      .pipe(
+        catchError(err => `Entry not created: ${err}`)
+      )
+      .subscribe(val => {
+        //console.log(val);
+        (<FormArray>this.journalEntry.get('tags')).clear();
+        this.journalEntry.reset();
+        
+        console.log(val._id);
+        const timelineData = new TimelineModel(12, String(val._id), 'journal', entry.dateTime, entry.title);
+        this.journalService.timelineEmitter.next(timelineData);
+      });
   }
 
   onAddTag(){
@@ -75,7 +87,6 @@ export class EntryAddComponent implements OnInit {
       (<FormArray>this.journalEntry.get('tags')).push(control);
       this.tagInputCount += 1;
     }
-
   }
 
   getControls(){

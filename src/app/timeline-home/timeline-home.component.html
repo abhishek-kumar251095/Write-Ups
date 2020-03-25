@@ -1,17 +1,17 @@
 <div class="container">
     <p class="header mt-5">{{username}}'s Timeline</p>
     <hr/>
-    <p [@emptyState] *ngIf = "timelineDataArr.length == 0" class="empty mt-5">Nothing to see here!</p>
-    <div class="jumbotron mt-3" *ngIf = "timelineDataArr.length > 0">
+    <div class="jumbotron mt-3" *ngIf = "timelineDataArr && timelineDataArr.length > 0">
         <div class="timeline">
             <div class="timeline-section" *ngFor = "let timeline of timelineDataArr.reverse()">
                 <div class="timeline-date">
                     <p>{{timeline.date | date:'EEEE, MMM d, y, h:mm a' }}</p>
                 </div>
-                <div class="timeline-detail" (click) = "onFetchDetail(timeline.id)">
+                <div class="timeline-detail" (click) = "onFetchDetail(timeline.entryId)">
                     <p>Added a new {{timeline.type}} entry titled '{{timeline.title}}'</p>
                 </div>
             </div>
         </div>
     </div>
+    <p [@emptyState] *ngIf = "timelineDataArr && timelineDataArr.length == 0" class="empty mt-5">Nothing to see here!</p>
 </div>

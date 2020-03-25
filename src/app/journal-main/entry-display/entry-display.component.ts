@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {JournalService} from '../../services/journal.service';
 import { ActivatedRoute } from '@angular/router';
-import {map} from 'rxjs/operators';
+import {map, catchError} from 'rxjs/operators';
 import {EntryModel} from '../Models/entry-model';
 
 @Component({
@@ -11,29 +11,37 @@ import {EntryModel} from '../Models/entry-model';
 })
 export class EntryDisplayComponent implements OnInit {
 
-  entryId: number;
+  entryId: string;
   entry: EntryModel;
 
   constructor(private journalService: JournalService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getEntryId();
-    this.entry = this.getEntryData();
   }
 
-  getEntryData(): EntryModel{
-    return this.journalService.getEntry(this.entryId);
+  getEntryData(){
+    console.log(this.entryId);
+    this.journalService
+        .getEntry(this.entryId)
+        .pipe(
+          catchError(err => err)
+        )
+        .subscribe((res: EntryModel) => {
+          this.entry = res;
+        });
   }
 
   getEntryId(){
     this.activeRoute.params
       .pipe(
         map(data => {
-          return +data.id
+          return data.id
         })
       )
       .subscribe((data) => {
-       this.entryId = data;
+        this.entryId = data;
+        this.getEntryData();  
       });
   }
 
