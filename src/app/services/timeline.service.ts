@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TimelineModel } from '../Models-Shared/timeline-model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +8,18 @@ import { TimelineModel } from '../Models-Shared/timeline-model';
 export class TimelineService {
 
   timelineArr: TimelineModel[] = [];
+  timelineServerUrl = 'https://write-ups-server.herokuapp.com/timeline';
   
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
-  addTimelineData(timelineData: TimelineModel): void{
-    this.timelineArr.push(timelineData);
+  addTimelineData(timelineData: TimelineModel){
+    console.log(timelineData.date);
+    return this.httpClient.post<TimelineModel>(this.timelineServerUrl, timelineData);
+    //this.timelineArr.push(timelineData);
   }
 
   getTimelineData(){
-    return this.timelineArr.slice();
+    return this.httpClient.get<TimelineModel[]>(this.timelineServerUrl);
   }
 
 }

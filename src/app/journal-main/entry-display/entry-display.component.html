@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="jumbotron">
-        <h2>{{entry.title}}</h2>
+    <div class="jumbotron" *ngIf="entry">
+        <h2>{{entry?.title}}</h2>
         <h5>
             <!-- {{entry.dateTime.toDateString() + ',' + entry.dateTime.toLocaleString().split(',')[1]}} -->
             {{entry.dateTime | date:'EEEE, MMM d, y, h:mm a'}}
@@ -11,7 +11,11 @@
             <p class="content">{{entry.content}}</p>
         </div>
     </div>
-    <div class="tag-div" *ngFor = "let tag of entry.tags">
-        {{tag}}
+    <div>
+
+    <div *ngIf="entry">
+        <div class="tag-div" *ngFor = "let tag of entry.tags">
+            {{tag}}
+        </div>
     </div>
 </div>
