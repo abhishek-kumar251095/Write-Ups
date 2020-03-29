@@ -147,7 +147,7 @@ export class EntryAddComponent implements OnInit {
       (<FormArray>this.journalEntry.get('tags')).clear();
       this.journalEntry.reset();
       
-      const timelineData = new TimelineModel(12, String(val._id), 'journal', entry.dateTime, entry.title);
+      const timelineData = new TimelineModel(12, String(val._id), 'journal', entry.dateTime, entry.title, 'add');
       this.journalService.timelineEmitter.next(timelineData);
     });
   }
@@ -190,8 +190,9 @@ export class EntryAddComponent implements OnInit {
         (<FormArray>this.journalEntry.get('tags')).clear();
         this.journalEntry.reset();
 
-      })
+        const timelineData = new TimelineModel(12, entryId, 'journal', entry.dateTime, entry.title, 'edit');
+        this.journalService.timelineEmitter.next(timelineData);
 
+      });
   }
-
 }

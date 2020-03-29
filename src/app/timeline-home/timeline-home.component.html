@@ -8,7 +8,7 @@
                     <p>{{timeline.date | date:'EEEE, MMM d, y, h:mm a' }}</p>
                 </div>
                 <div class="timeline-detail" (click) = "onFetchDetail(timeline.entryId)">
-                    <p>Added a new {{timeline.type}} entry titled '{{timeline.title}}'</p>
+                    <p>{{timeline.activity | activity}} {{timeline.type}} entry titled '{{timeline.title}}'</p>
                 </div>
             </div>
         </div>
