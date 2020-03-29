@@ -25,7 +25,6 @@ export class AppComponent {
   ngOnInit(): void {
 
     if(this.usersService.getUsername() != ''){
-      console.log(this.usersService.getUsername());
       this.notLoggedIn = false;
     }
 
@@ -35,7 +34,6 @@ export class AppComponent {
     })
 
     this.subscriptionTimeline = this.journalService.timelineEmitter.subscribe(journalData => {
-      console.log(journalData);
       this.timelineService
         .addTimelineData(journalData)
         .pipe(

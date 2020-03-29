@@ -13,7 +13,6 @@ export class TimelineService {
   constructor(private httpClient: HttpClient) { }
 
   addTimelineData(timelineData: TimelineModel){
-    console.log(timelineData.date);
     return this.httpClient.post<TimelineModel>(this.timelineServerUrl, timelineData);
     //this.timelineArr.push(timelineData);
   }

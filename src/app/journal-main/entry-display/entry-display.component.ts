@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {JournalService} from '../../services/journal.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {map, catchError} from 'rxjs/operators';
 import {EntryModel} from '../Models/entry-model';
 
@@ -14,14 +14,14 @@ export class EntryDisplayComponent implements OnInit {
   entryId: string;
   entry: EntryModel;
 
-  constructor(private journalService: JournalService, private activeRoute: ActivatedRoute) { }
+  constructor(private journalService: JournalService,
+               private activeRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.getEntryId();
   }
 
   getEntryData(){
-    console.log(this.entryId);
     this.journalService
         .getEntry(this.entryId)
         .pipe(
@@ -43,6 +43,10 @@ export class EntryDisplayComponent implements OnInit {
         this.entryId = data;
         this.getEntryData();  
       });
+  }
+
+  onEdit(){
+    this.router.navigate(['journal','edit',this.entryId]);
   }
 
 }

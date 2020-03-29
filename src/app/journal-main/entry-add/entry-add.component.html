@@ -1,7 +1,7 @@
 <div class="container">
 
     <!-- <div class="card bg-light mb-3" style="margin-top: 3em;"> -->
-    <form [formGroup] = "journalEntry" (ngSubmit) = "onEntrySubmit()">
+    <form *ngIf = "journalEntry" [formGroup] = "journalEntry" (ngSubmit) = "onEntrySubmit()">
         <div class="jumbotron mt-4">
             <div class="form-group form-inline">
               <!-- <label for="title">Title</label> -->

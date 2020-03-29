@@ -10,6 +10,7 @@ import { EntryDisplayComponent } from '../journal-main/entry-display/entry-displ
 const routes: Routes = [
     {path:'journal', component:JournalMainComponent},
     {path:'journal/add', component: EntryAddComponent},
+    {path: 'journal/edit/:id', component: EntryAddComponent},
     {path:'journal/display', component:EntriesComponent},
     {path:'journal/:id', component:EntryDisplayComponent}
   ];

@@ -9,7 +9,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class JournalService {
 
-  journalUrl = 'https://write-ups-server.herokuapp.com/journal';
+  //journalUrl = 'https://write-ups-server.herokuapp.com/journal';
+  journalUrl = 'http://localhost:3000/journal';
+
 
   journalData: EntryModel[] = [];
   timelineEmitter: Subject<TimelineModel> = new Subject<TimelineModel>();
@@ -22,7 +24,6 @@ export class JournalService {
   }
 
   getEntry(id: string){
-    console.log(id);
     return this.httpClient.get<EntryModel>(this.journalUrl + `/${id}`);
     //return this.journalData.slice()[id];
   }
@@ -30,5 +31,10 @@ export class JournalService {
   addEntry(entry: EntryModel){
     //this.journalData.push(entry);    
     return this.httpClient.post<EntryModel | any>(this.journalUrl, entry);
+  }
+
+  editEntry(entry: EntryModel | any, entryId: string){
+    entry._id = entryId;
+    return this.httpClient.put<EntryModel | any>(this.journalUrl, entry);
   }
 }
