@@ -9,8 +9,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class JournalService {
 
-  //journalUrl = 'https://write-ups-server.herokuapp.com/journal';
-  journalUrl = 'http://localhost:3000/journal';
+  journalUrl = 'https://write-ups-server.herokuapp.com/journal';
+  //journalUrl = 'http://localhost:3000/journal';
 
 
   journalData: EntryModel[] = [];
