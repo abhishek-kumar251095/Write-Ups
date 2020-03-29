@@ -25,3 +25,34 @@ p.content{
     margin: 3em;
     white-space: pre-wrap; 
 }
+
+.pencil {
+    width: 5px ;
+    height: 17px ;
+    background: dimgray ;
+    position: relative ;
+    transform: rotate(30deg);
+    float: right;
+    cursor: pointer;
+  }
+  .pencil::before {
+    content: "" ;
+    position: absolute ;
+    width: 5px ;
+    height: 5px ;
+    background: dimgray ;
+    top: -7px ;
+  }
+  .pencil::after {
+    content: "" ;
+    position: absolute ;
+    width: 4px ;
+    height: 4px ;
+    background: dimgray ;
+    left: 0.4px ;
+    bottom: -4px ;
+    transform: rotate(45deg);
+  }
+  .pencil:hover{
+    background: crimson;
+  }

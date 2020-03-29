@@ -1,3 +1,8 @@
+/*
+This module is responsible for adding a new entry
+and editing an existing entry. 
+*/
+
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import {EntryModel} from '../Models/entry-model';
@@ -5,6 +10,7 @@ import {JournalService} from '../../services/journal.service';
 import { TimelineModel } from 'src/app/Models-Shared/timeline-model';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { catchError } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-entry-add',
@@ -24,14 +30,19 @@ import { catchError } from 'rxjs/operators';
 })
 export class EntryAddComponent implements OnInit {
 
-  journalEntry: FormGroup
-  tagInputCount: number = 0
+  journalEntry: FormGroup;
+  tagInputCount: number = 0;
+  entryId: string;
+  entryDetail: EntryModel;
 
-  constructor(private journalService: JournalService) { }
+  constructor(private journalService: JournalService, private routerActive: ActivatedRoute) { }
 
   ngOnInit(): void {
 
-    const currentDateTime = new Date();
+    this.routerActive.params.subscribe(result => {
+      this.entryId = result.id;
+    })
+    
     const dateOptions = {
       weekday: "short",
       month: "short",
@@ -41,14 +52,45 @@ export class EntryAddComponent implements OnInit {
       year: "numeric"  
     };
 
-    this.journalEntry = new FormGroup({
-      dateTime: new FormControl(currentDateTime.toLocaleString("en", dateOptions)),
-      title: new FormControl(null, Validators.required),
-      content: new FormControl(null, Validators.required),
-      tags: new FormArray([])
-    });
+    if (this.entryId === undefined) {
+
+      const currentDateTime = new Date();
+
+      this.journalEntry = new FormGroup({
+        dateTime: new FormControl(currentDateTime.toLocaleString("en", dateOptions)),
+        title: new FormControl(null, Validators.required),
+        content: new FormControl(null, Validators.required),
+        tags: new FormArray([])
+      });
+
+    } else {
+
+      this.getEntryDetails(this.entryId)
+        .subscribe((res: EntryModel) => {
+
+          this.entryDetail = res;
+
+          const dateEditedEntry = new Date(this.entryDetail.dateTime); 
+
+          this.journalEntry = new FormGroup({
+            dateTime: new FormControl(dateEditedEntry.toLocaleString("en", dateOptions)),
+            title: new FormControl(this.entryDetail.title, Validators.required),
+            content: new FormControl(this.entryDetail.content, Validators.required),
+            tags: new FormArray([])
+
+        });
+
+        this.addTagFormControl(this.entryDetail.tags);  
+
+      });
+    }
   }
 
+  /*
+  Submit the newly added/modified entry.
+  If the url has an 'id' parameter then editEntry() is to be called
+  otherwise call addEntry()
+  */
   onEntrySubmit(){ 
     const entry: EntryModel = {
       userId:1,
@@ -59,42 +101,97 @@ export class EntryAddComponent implements OnInit {
       tags: this.journalEntry.value.tags
     };
 
-    console.log(new Date(entry.dateTime).getFullYear());
-
     const filteredEntry = entry.tags.filter(item => item != null);
     entry.tags = filteredEntry;
-    //console.log('here');
-    this.journalService
-      .addEntry(entry)
-      .pipe(
-        catchError(err => `Entry not created: ${err}`)
-      )
-      .subscribe(val => {
-        //console.log(val);
-        (<FormArray>this.journalEntry.get('tags')).clear();
-        this.journalEntry.reset();
-        
-        console.log(val._id);
-        const timelineData = new TimelineModel(12, String(val._id), 'journal', entry.dateTime, entry.title);
-        this.journalService.timelineEmitter.next(timelineData);
-      });
+    
+    if (this.entryId === undefined) {
+      this.addNewEntry(entry);
+    } else {
+      this.editEntry(entry, this.entryId);
+    }
   }
 
+
+  /*
+    Adds a new tag input.
+  */
   onAddTag(){
 
     if (this.tagInputCount < 6) {
-      const control = new FormControl(null,Validators.required);
+      const control = new FormControl(null, Validators.required);
       (<FormArray>this.journalEntry.get('tags')).push(control);
       this.tagInputCount += 1;
     }
   }
 
+  //Get the number of inputs for tags array
   getControls(){
     return (<FormArray>this.journalEntry.get('tags')).controls;
   }
 
+  //Increase the height of TextArea with the content
   onInput(){
     const element = document.getElementById("content");
     element.style.height = element.style.height = element.scrollHeight + "px";
   }
+
+  //Calls the journal service to add a new entry and emits an event for the timeline.
+  addNewEntry(entry: EntryModel){
+    this.journalService
+    .addEntry(entry)
+    .pipe(
+      catchError(err => `Entry not created: ${err}`)
+    )
+    .subscribe(val => {
+      //console.log(val);
+      (<FormArray>this.journalEntry.get('tags')).clear();
+      this.journalEntry.reset();
+      
+      const timelineData = new TimelineModel(12, String(val._id), 'journal', entry.dateTime, entry.title);
+      this.journalService.timelineEmitter.next(timelineData);
+    });
+  }
+
+  //Get entry-details by id (by calling the journal service)
+  getEntryDetails(id: string){
+
+    return this.journalService
+      .getEntry(id)
+      .pipe(
+        catchError(err => `Unable to fetch details: ${err}`)
+      );
+
+  }
+
+  createTagFormControl(value: string){
+
+    let tag = new FormControl(value, Validators.required);
+    (<FormArray>this.journalEntry.get('tags')).push(tag);
+    this.tagInputCount += 1;
+
+  }
+
+  addTagFormControl(tags: string[]){
+
+    tags.map(tag => {
+      this.createTagFormControl(tag);
+    })
+  }
+
+  editEntry(entry: EntryModel, entryId: string){
+
+    this.journalService
+      .editEntry(entry, entryId)
+      .pipe(
+        catchError(err => `Edit failed: ${err}`)
+      )
+      .subscribe(res => {
+
+        (<FormArray>this.journalEntry.get('tags')).clear();
+        this.journalEntry.reset();
+
+      })
+
+  }
+
 }
