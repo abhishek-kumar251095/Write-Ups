@@ -15,6 +15,7 @@ import { NameComponent } from './name/name.component';
 import {HttpClientModule} from '@angular/common/http';
 
 import {CookieService} from 'ngx-cookie-service';
+import { ActivityPipe } from './pipes/activity.pipe';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {CookieService} from 'ngx-cookie-service';
     AppComponent,
     TimelineHomeComponent,
     NameComponent,
+    ActivityPipe,
   ],
   imports: [
     BrowserModule,

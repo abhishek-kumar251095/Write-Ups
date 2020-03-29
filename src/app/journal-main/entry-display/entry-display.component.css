@@ -9,6 +9,7 @@
 
 .jumbotron{
     background-color: snow;
+    font-family: 'Volkorn Serif';
 }
 
 h2, h5{
@@ -20,7 +21,7 @@ h2, h5{
 }
 
 p.content{
-    font-size: 16px; 
+    font-size: medium; 
     text-align: justify;
     margin: 3em;
     white-space: pre-wrap; 
