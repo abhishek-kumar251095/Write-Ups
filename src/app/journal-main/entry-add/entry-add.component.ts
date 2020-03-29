@@ -1,6 +1,6 @@
 /*
 This module is responsible for adding a new entry
-and editing an existing entry. 
+and editing existing entries. 
 */
 
 import { Component, OnInit } from '@angular/core';
