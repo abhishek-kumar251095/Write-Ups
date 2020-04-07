@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { JournalService } from './services/journal.service';
 import { TimelineService } from './services/timeline.service';
-import { UsersService } from './services/users.service';
+import { AuthenticationService } from './services/authentication.service';
 import { map, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,33 +21,36 @@ export class AppComponent {
 
   constructor(private journalService: JournalService, 
               private timelineService: TimelineService,
-              private usersService: UsersService){}
+              private authenticationService: AuthenticationService,
+              private router: Router){}
 
   ngOnInit(): void {
 
-    if(this.usersService.getUsername() != ''){
+    if(this.authenticationService.isLoggedIn()){
       this.notLoggedIn = false;
+      this.router.navigate(['timeline']);
     }
 
-    this.subscriptionUsers = this.usersService.loginEmitter.subscribe(isLoggedIn => {
+    //Subscribe to the login event.
+    this.subscriptionUsers = this.authenticationService.authEmitter.subscribe(isLoggedIn => {
       this.notLoggedIn = !isLoggedIn;
-      this.username = this.usersService.getUsername();
+      this.username = this.authenticationService.getUsername();
+      this.router.navigate(['timeline']);
     })
 
+    //Subscribe to the timeline event
     this.subscriptionTimeline = this.journalService.timelineEmitter.subscribe(journalData => {
       this.timelineService
         .addTimelineData(journalData)
         .pipe(
           map(res => {
-            console.log(res);
+            console.log(res); //remove
           }),
           catchError(err => {
-            console.log(err); 
             return err;
           })
         )
         .subscribe(res => {
-          console.log(res);
         });
     });
   }
@@ -54,6 +58,12 @@ export class AppComponent {
   ngOnDestroy(): void {
     this.subscriptionTimeline.unsubscribe(); 
     this.subscriptionUsers.unsubscribe();
+  }
+
+  onLogout(): void {
+    this.authenticationService.logout();
+    this.notLoggedIn = true;
+    this.router.navigate(['']);
   }
 
 }

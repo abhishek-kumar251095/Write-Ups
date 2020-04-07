@@ -21,7 +21,7 @@ export class EntriesComponent implements OnInit {
         .getEntries()
         .pipe(
           map((res: EntryModel[]) => {
-            console.log(res);
+            console.log(res); //remove
             return res;
           }),
           catchError(err => "Cannot fetch entry data")

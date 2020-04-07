@@ -1,9 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" [routerLink] = "''">WriteUps</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button
+    class="navbar-toggler" 
+    type="button" 
+    data-toggle="collapse" 
+    data-target="#navbarNav" 
+    aria-controls="navbarNav" 
+    aria-expanded="false" 
+    aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="collapse navbar-collapse" id="navbarNav" *ngIf = "!notLoggedIn">
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" [routerLink] = "'journal'" [routerLinkActive] = "'active'">Journals</a>
@@ -15,7 +22,12 @@
         <a class="nav-link" [routerLinkActive] = "'active'">Extended</a>
       </li>
     </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item ml-auto">
+        <a class="nav-link" [routerLinkActive] = "'active'" (click) = "onLogout()">Logout</a>
+      </li>
+    </ul>
   </div>
 </nav>
-<app-name *ngIf = "notLoggedIn"></app-name>
-<router-outlet *ngIf = "!notLoggedIn"></router-outlet>
+
+<router-outlet></router-outlet>

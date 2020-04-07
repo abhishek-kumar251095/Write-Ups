@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="card register-container">
+        <div class="card-body">
+            <h1>Register</h1>
+            <hr/>
+            <form *ngIf = "registerForm" [formGroup] = "registerForm" (ngSubmit) = "onRegister()">
+                <div class="form-group">
+                    <input
+                        class="form-control"
+                        type = "text"
+                        name = "username"
+                        [formControlName] = "'username'"
+                        placeholder="Username"
+                        autocomplete="off">
+
+                    <input 
+                        class="form-control"
+                        type = "password"
+                        name = "password"
+                        [formControlName] = "'password'"
+                        placeholder="Password"
+                        autocomplete="off"/>
+                    
+                    <input 
+                        class="form-control"
+                        type = "email"
+                        name = "email"
+                        [formControlName] = "'email'"
+                        placeholder="Email Id"
+                        autocomplete="off"/>
+                </div>
+                <hr/>
+                <button class="btn btn-info btn-register">Register</button>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-login">Already have an account?</p>
+                    </div>
+                    <div class="offset-md-1 col-md-3">
+                        <a class="btn btn-info btn-login" [routerLink] = "''">Sign In</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf = "errMsg" class="card-footer"><span class="errMsg">{{errMsg}}</span></div>
+    </div>
+</div>
