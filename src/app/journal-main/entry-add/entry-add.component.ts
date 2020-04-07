@@ -93,7 +93,6 @@ export class EntryAddComponent implements OnInit {
   */
   onEntrySubmit(){ 
     const entry: EntryModel = {
-      userId:1,
       dateTime: this.journalEntry.value.dateTime,
       title: this.journalEntry.value.title,
       content: this.journalEntry.value.content,
@@ -101,6 +100,7 @@ export class EntryAddComponent implements OnInit {
       tags: this.journalEntry.value.tags
     };
 
+    console.log(entry.tags); //remove
     const filteredEntry = entry.tags.filter(item => item != null);
     entry.tags = filteredEntry;
     
@@ -147,7 +147,7 @@ export class EntryAddComponent implements OnInit {
       (<FormArray>this.journalEntry.get('tags')).clear();
       this.journalEntry.reset();
       
-      const timelineData = new TimelineModel(12, String(val._id), 'journal', entry.dateTime, entry.title, 'add');
+      const timelineData = new TimelineModel(String(val._id), 'journal', entry.dateTime, entry.title, 'add');
       this.journalService.timelineEmitter.next(timelineData);
     });
   }
@@ -190,7 +190,7 @@ export class EntryAddComponent implements OnInit {
         (<FormArray>this.journalEntry.get('tags')).clear();
         this.journalEntry.reset();
 
-        const timelineData = new TimelineModel(12, entryId, 'journal', entry.dateTime, entry.title, 'edit');
+        const timelineData = new TimelineModel(entryId, 'journal', entry.dateTime, entry.title, 'edit');
         this.journalService.timelineEmitter.next(timelineData);
 
       });

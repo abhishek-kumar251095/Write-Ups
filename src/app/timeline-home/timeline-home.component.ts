@@ -3,7 +3,7 @@ import {TimelineModel} from '../Models-Shared/timeline-model';
 import { TimelineService } from '../services/timeline.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
-import { UsersService } from '../services/users.service';
+import { AuthenticationService } from '../services/authentication.service';
 import { map, catchError } from 'rxjs/operators';
  
 @Component({
@@ -33,16 +33,15 @@ export class TimelineHomeComponent implements OnInit {
 
   constructor(private timelineService: TimelineService, 
               private activatedRouter: Router,
-              private usersService: UsersService) { }
+              private authService: AuthenticationService) { }
 
   ngOnInit(): void {
 
-    this.username = this.usersService.getUsername().split(' ')[0].replace(/"/g,'');
+    this.username = this.authService.getUsername();//.split(' ')[0].replace(/"/g,'');
     this.timelineService
         .getTimelineData()
         .pipe(
           map(res => {
-            console.log(res);
             return res
           }),
           catchError(err => err)

@@ -1,8 +1,7 @@
 export class TimelineModel{
 
-    constructor(public userId:number, public entryId:string, 
-                public type:string, public date: Date, 
-                public title: string, public activity: string) {
+    constructor(public entryId:string, public type:string, public date: Date, 
+                public title: string, public activity: string, public userId?:string ) {
         
     }   
 

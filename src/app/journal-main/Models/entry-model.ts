@@ -1,6 +1,6 @@
 export interface EntryModel{
 
-    userId: number,
+    userId?: string,
     dateTime: Date,
     title: string,
     content: string,

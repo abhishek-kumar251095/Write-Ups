@@ -1,0 +1,54 @@
+.register-container {
+    margin: auto;
+    width: 40%;
+    margin-top: 5em;
+    background-color: floralwhite;
+    border-radius: 2%;
+}
+
+.ng-valid {
+    border: 1px solid gainsboro;
+}
+.errMsg {
+    margin: auto;
+    text-align: center;
+    font-size: small;
+    color: firebrick;
+}
+
+.register-container input {
+    margin-top: 1em;
+    font-size: small;
+}
+
+.register-container input:focus {
+    border:0px;
+}
+
+.invalid-input {
+     border: 1px solid crimson;
+}
+
+.register-container h1 {
+    text-align: center;
+    font-family: 'Verdana' ;
+}
+
+.btn-register {
+    width: 100%;
+}
+
+.text-login {
+    float: right;;
+}
+
+.btn-login {
+    float: left;
+    color: white;
+    height: 80%;
+}
+
+.btn-login:hover{
+    color: white;
+}
+

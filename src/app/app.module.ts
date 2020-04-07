@@ -10,20 +10,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { JournalMainModule } from './journal-main/journal-main.module';
 import { TimelineHomeComponent } from './timeline-home/timeline-home.component';
-import { NameComponent } from './name/name.component';
 
 import {HttpClientModule} from '@angular/common/http';
 
-import {CookieService} from 'ngx-cookie-service';
 import { ActivityPipe } from './pipes/activity.pipe';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { RegistrationComponent } from './authentication/registration/registration.component';
+import { LoginComponent } from './authentication/login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TimelineHomeComponent,
-    NameComponent,
     ActivityPipe,
+    AuthenticationComponent,
+    RegistrationComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,7 @@ import { ActivityPipe } from './pipes/activity.pipe';
     FormsModule,
     HttpClientModule
   ],
-  providers: [CookieService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
