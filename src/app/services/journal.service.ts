@@ -12,8 +12,8 @@ export class JournalService {
 
   constructor(private httpClient: HttpClient, private authService: AuthenticationService) { }
 
-  //journalUrl = 'https://write-ups-server.herokuapp.com/journal';
-  journalUrl = 'http://localhost:3000/journal';
+  journalUrl = 'https://write-ups-server.herokuapp.com/journal';
+  //journalUrl = 'http://localhost:3000/journal';
 
   journalData: EntryModel[] = [];
   timelineEmitter: Subject<TimelineModel> = new Subject<TimelineModel>();

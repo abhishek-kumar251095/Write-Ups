@@ -9,8 +9,8 @@ import { AuthenticationService } from './authentication.service';
 export class TimelineService {
 
   timelineArr: TimelineModel[] = [];
-  //timelineServerUrl = 'https://write-ups-server.herokuapp.com/timeline';
-  timelineServerUrl = 'http://localhost:3000/timeline';
+  timelineServerUrl = 'https://write-ups-server.herokuapp.com/timeline';
+  //timelineServerUrl = 'http://localhost:3000/timeline';
   
   constructor(private httpClient: HttpClient, private authService: AuthenticationService) { }
 
