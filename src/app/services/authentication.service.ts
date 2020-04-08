@@ -9,7 +9,8 @@ import { Subject, Observable } from 'rxjs';
 })
 export class AuthenticationService {
 
-  private baseUrl = 'http://localhost:3000/user/';
+  //private baseUrl = 'http://localhost:3000/user/';
+  private baseUrl = 'https://write-ups-server.herokuapp.com/user/'
   authEmitter: Subject<boolean> = new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
@@ -57,7 +58,7 @@ export class AuthenticationService {
   isLoggedIn(): boolean {
 
     const tokenDetails = this.getTokenDetails();
-    
+
     if (tokenDetails && tokenDetails.exp > Date.now()/1000)
       return true;
 

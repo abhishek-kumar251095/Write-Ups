@@ -100,7 +100,6 @@ export class EntryAddComponent implements OnInit {
       tags: this.journalEntry.value.tags
     };
 
-    console.log(entry.tags); //remove
     const filteredEntry = entry.tags.filter(item => item != null);
     entry.tags = filteredEntry;
     
@@ -143,7 +142,6 @@ export class EntryAddComponent implements OnInit {
       catchError(err => `Entry not created: ${err}`)
     )
     .subscribe(val => {
-      //console.log(val);
       (<FormArray>this.journalEntry.get('tags')).clear();
       this.journalEntry.reset();
       

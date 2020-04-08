@@ -44,7 +44,7 @@ export class AppComponent {
         .addTimelineData(journalData)
         .pipe(
           map(res => {
-            console.log(res); //remove
+            return res
           }),
           catchError(err => {
             return err;
