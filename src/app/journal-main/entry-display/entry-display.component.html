@@ -4,7 +4,7 @@
         <h2>{{entry?.title}}</h2>
         <h5>
             <!-- {{entry.dateTime.toDateString() + ',' + entry.dateTime.toLocaleString().split(',')[1]}} -->
-            {{entry.dateTime | date:'EEEE, MMM d, y, h:mm a'}}
+            {{entry.dateTime.toString() | date:'EEEE, MMM d, y, h:mm a'}}
 
         </h5>
         <hr/>
