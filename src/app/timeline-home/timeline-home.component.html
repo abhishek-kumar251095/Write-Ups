@@ -5,7 +5,7 @@
         <div class="timeline">
             <div class="timeline-section" *ngFor = "let timeline of timelineDataArr.reverse()">
                 <div class="timeline-date">
-                    <p>{{timeline.date | date:'EEEE, MMM d, y, h:mm a' }}</p>
+                    <p>{{timeline.date.toString() | date:'EEEE, MMM d, y, h:mm a' }}</p>
                 </div>
                 <div class="timeline-detail" (click) = "onFetchDetail(timeline.entryId)">
                     <p>{{timeline.activity | activity}} {{timeline.type}} entry titled '{{timeline.title}}'</p>

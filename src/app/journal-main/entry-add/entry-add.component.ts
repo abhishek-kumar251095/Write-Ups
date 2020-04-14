@@ -87,13 +87,13 @@ export class EntryAddComponent implements OnInit {
   }
 
   /*
-  Submit the newly added/modified entry.
-  If the url has an 'id' parameter then editEntry() is to be called
-  otherwise call addEntry()
+  Submits the newly added/modified entry.
+  If the url has an 'id' parameter then calls editEntry(), 
+  otherwise calls addEntry()
   */
   onEntrySubmit(){ 
     const entry: EntryModel = {
-      dateTime: this.journalEntry.value.dateTime,
+      dateTime: new Date(this.journalEntry.value.dateTime).toUTCString(),
       title: this.journalEntry.value.title,
       content: this.journalEntry.value.content,
       length: this.journalEntry.value.content.length,
@@ -109,7 +109,6 @@ export class EntryAddComponent implements OnInit {
       this.editEntry(entry, this.entryId);
     }
   }
-
 
   /*
     Adds a new tag input.
@@ -161,6 +160,7 @@ export class EntryAddComponent implements OnInit {
 
   }
 
+  // Creates an input field with a tag
   createTagFormControl(value: string){
 
     let tag = new FormControl(value, Validators.required);
@@ -169,6 +169,7 @@ export class EntryAddComponent implements OnInit {
 
   }
 
+  // Adds an input field for every existing tag
   addTagFormControl(tags: string[]){
 
     tags.map(tag => {
@@ -176,6 +177,7 @@ export class EntryAddComponent implements OnInit {
     })
   }
 
+  //Calls the journal service to edit an existing entry and emits an event for the timeline.
   editEntry(entry: EntryModel, entryId: string){
 
     this.journalService
