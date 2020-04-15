@@ -31,8 +31,9 @@
 }
 
  .timeline-detail{
+    margin-top: 1em;
     cursor: pointer;
-    display: block;
+    display: inline-table ;
     position: relative;
     font-size: small;
     background-color: rgb(49, 135, 146);
@@ -57,12 +58,13 @@
     padding:2px 15px;
     background:rgb(79, 121, 145);
     position:relative;
-    display:inline-block;
+    display:block;
     border-radius:20px;
     font-size: small;
     border:1px solid #17191B;
     color:#fff;
     text-shadow:1px 1px 1px rgba(0,0,0,0.3);
+    width: fit-content;
 }
 .timeline-section:before{
     content:'';

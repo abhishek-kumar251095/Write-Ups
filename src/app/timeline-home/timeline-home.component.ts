@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, AfterViewChecked, AfterViewInit } from '@angular/core';
-import {TimelineModel} from '../Models-Shared/timeline-model';
 import { TimelineService } from '../services/timeline.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { map, catchError } from 'rxjs/operators';
+import { TimelineResponseModel } from '../Models-Shared/timeline-response-model';
  
 @Component({
   selector: 'app-timeline-home',
@@ -28,7 +28,7 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class TimelineHomeComponent implements OnInit {
 
-  timelineDataArr: TimelineModel[];
+  timelineDataArr: TimelineResponseModel[];
   username: string;
 
   constructor(private timelineService: TimelineService, 
@@ -46,7 +46,7 @@ export class TimelineHomeComponent implements OnInit {
           }),
           catchError(err => err)
         )
-        .subscribe((res: TimelineModel[]) => {
+        .subscribe((res: TimelineResponseModel[]) => {
           this.timelineDataArr = res;
         });    
   }
