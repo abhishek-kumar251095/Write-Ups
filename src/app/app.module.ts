@@ -17,6 +17,7 @@ import { ActivityPipe } from './pipes/activity.pipe';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { RegistrationComponent } from './authentication/registration/registration.component';
 import { LoginComponent } from './authentication/login/login.component';
+import { DateStrPipe } from './pipes/date-str.pipe';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { LoginComponent } from './authentication/login/login.component';
     AuthenticationComponent,
     RegistrationComponent,
     LoginComponent,
+    DateStrPipe,
   ],
   imports: [
     BrowserModule,
