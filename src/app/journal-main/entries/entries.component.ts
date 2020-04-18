@@ -11,7 +11,8 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class EntriesComponent implements OnInit {
 
-  journalEntries: EntryModel[]
+  journalEntries: EntryModel[];
+  err: string;
 
   constructor(private journalService: JournalService, private router: Router) { }
 
@@ -23,7 +24,10 @@ export class EntriesComponent implements OnInit {
           map((res: EntryModel[]) => {
             return res;
           }),
-          catchError(err => "Cannot fetch entry data")
+          catchError(err => {
+            this.err = "Cannot fetch entry data: "+ err;
+            return null;
+          })
         )
         .subscribe((res: EntryModel[]) => {
           this.journalEntries = res;

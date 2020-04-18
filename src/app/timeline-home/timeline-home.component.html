@@ -1,8 +1,14 @@
 <div class="container">
     <p class="header mt-5">{{username}}'s Timeline</p>
     <hr/>
-    <div class="jumbotron mt-3" *ngIf = "timelineDataArr && timelineDataArr.length > 0">
-        <div class="timeline">
+    
+    <div class="jumbotron mt-3" >
+        <div class="spinner-container" *ngIf = "!timelineDataArr">
+            <div class="spinner-load spinner-grow text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="timeline" *ngIf = "timelineDataArr && timelineDataArr.length > 0">
             <div class="timeline-section" *ngFor = "let timeline of timelineDataArr.reverse()">
                 <div class="timeline-date">
                     <p>
