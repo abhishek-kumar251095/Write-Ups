@@ -1,22 +1,32 @@
 <div class="container">
-    <div class="jumbotron" *ngIf="entry">
-        <span class="pencil" (click) = "onEdit()"></span>
-        <h2>{{entry?.title}}</h2>
-        <h5>
-            <!-- {{entry.dateTime.toDateString() + ',' + entry.dateTime.toLocaleString().split(',')[1]}} -->
-            {{entry.dateTime.toString() | date:'EEEE, MMM d, y, h:mm a'}}
+    
+    <div class="jumbotron">
 
-        </h5>
-        <hr/>
-        <div class="container-fluid">
-            <p class="content">{{entry.content}}</p>
+        <div class="spinner-container" *ngIf = "!entry">
+            <div class="spinner-load spinner-grow text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
-    </div>
-    <div>
 
-    <div *ngIf="entry">
-        <div class="tag-div" *ngFor = "let tag of entry.tags">
-            {{tag}}
+        <div *ngIf="entry">
+            <span class="pencil" (click) = "onEdit()"></span>
+            <h2>{{entry?.title}}</h2>
+            <h5>
+                <!-- {{entry.dateTime.toDateString() + ',' + entry.dateTime.toLocaleString().split(',')[1]}} -->
+                {{entry.dateTime.toString() | date:'EEEE, MMM d, y, h:mm a'}}
+
+            </h5>
+            <hr/>
+            <div class="container-fluid">
+                <p class="content">{{entry.content}}</p>
+            </div>
         </div>
+
+        <div *ngIf="entry">
+            <div class="tag-div" *ngFor = "let tag of entry.tags">
+                {{tag}}
+            </div>
+        </div>
+
     </div>
 </div>
