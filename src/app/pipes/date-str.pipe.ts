@@ -9,7 +9,6 @@ export class DateStrPipe implements PipeTransform {
 
     let finalStr = '';
     let date = new Date(value.year, value.month, value.date);
-    console.log(value.month);
 
     return date;
   }

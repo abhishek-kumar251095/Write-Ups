@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { EntryModel } from '../journal-main/Models/entry-model';
-import { Subject } from 'rxjs/';
+import { Subject, ObservableInput, Observable } from 'rxjs/';
 import { TimelineModel } from '../Models-Shared/timeline-model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
@@ -59,5 +59,14 @@ export class JournalService {
     });
     
     return this.httpClient.put<EntryModel | any>(this.journalUrl, entry,  {headers: reqHeaders});
+  }
+
+  getEntriesByTag(tag: string): Observable<EntryModel | any> {
+    const reqHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${JSON.parse(JSON.stringify(this.authService.getToken()))}`
+    };
+    console.log(this.authService.getToken());
+    return this.httpClient.get(this.journalUrl+'/tag/'+tag, {headers: reqHeaders});
   }
 }

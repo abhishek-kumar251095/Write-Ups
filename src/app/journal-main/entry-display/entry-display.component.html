@@ -22,11 +22,10 @@
             </div>
         </div>
 
-        <div *ngIf="entry">
-            <div class="tag-div" *ngFor = "let tag of entry.tags">
-                {{tag}}
-            </div>
+    </div>
+    <div *ngIf="entry">
+        <div class="tag-div" *ngFor = "let tag of entry.tags" (click) = "onTagClicked(tag)">
+            {{tag}}
         </div>
-
     </div>
 </div>
