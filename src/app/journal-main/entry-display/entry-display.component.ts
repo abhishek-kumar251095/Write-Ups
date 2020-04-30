@@ -49,4 +49,8 @@ export class EntryDisplayComponent implements OnInit {
     this.router.navigate(['journal','edit',this.entryId]);
   }
 
+  onTagClicked(tag) {
+    this.router.navigate(['journal', 'display'], {queryParams: {tag: tag}});
+  }
+
 }
